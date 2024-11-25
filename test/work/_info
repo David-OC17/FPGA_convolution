@@ -1,0 +1,143 @@
+m255
+K4
+z2
+!s11f MIXED_VERSIONS
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/david/Documents/UNI_S.5/FPGA/complex_conv/test
+vadder3_complex
+Z1 !s110 1732497449
+!i10b 1
+!s100 Pifz:CA7i:9JD[@R14l<X3
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+IFOFR]P8F0TAUVTNXPD>4N0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1732497169
+8../adder3_complex.v
+F../adder3_complex.v
+!i122 9
+L0 1 25
+Z4 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z5 !s108 1732497449.000000
+!s107 ./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
+Z6 !s90 -F|comp_files.FILES|
+!i113 1
+Z7 tCvgOpt 0
+vmult_complex
+R1
+!i10b 1
+!s100 >gRJkLeiIj`Kod4AHcif<2
+R2
+I683fgnBa]hgbDEO3^b7A41
+R3
+R0
+w1732475747
+8../mult_complex.v
+F../mult_complex.v
+!i122 9
+L0 1 29
+R4
+r1
+!s85 0
+31
+R5
+Z8 !s107 ./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
+R6
+!i113 1
+R7
+vmult_fixed_complex
+R1
+!i10b 1
+!s100 Sl0<0aCz]ZeeRQ;be^DKK0
+R2
+I5:Jh`b8m0EOmA_i[:08Ea3
+R3
+R0
+w1732495270
+8../mult_fixed_complex.v
+F../mult_fixed_complex.v
+!i122 9
+L0 1 51
+R4
+r1
+!s85 0
+31
+R5
+R8
+R6
+!i113 1
+R7
+vtb_adder3_complex
+R1
+!i10b 1
+!s100 RH[9lb0[f04LKE_gc4T?[1
+R2
+IWXkTzg=5RQUKG?_DOZTWf0
+R3
+R0
+w1732497447
+8./adder3_complex_tb.v
+F./adder3_complex_tb.v
+!i122 9
+L0 3 79
+R4
+r1
+!s85 0
+31
+R5
+R8
+R6
+!i113 1
+R7
+vtb_mult_complex
+R1
+!i10b 1
+!s100 Te;7QZ3=mf0XlI81QU6@22
+R2
+I39[2LSNT8GGhml__nS3mX1
+R3
+R0
+w1732475511
+8./mult_complex_tb.v
+F./mult_complex_tb.v
+!i122 9
+L0 3 70
+R4
+r1
+!s85 0
+31
+R5
+R8
+R6
+!i113 1
+R7
+vtb_mult_fixed_complex
+R1
+!i10b 1
+!s100 ]1@l<T5K<^=2T@QAm:JiO0
+R2
+IYgKX17Y]Pf[QI1?KV:A8f3
+R3
+R0
+w1732495246
+8./mult_fixed_complex_tb.v
+F./mult_fixed_complex_tb.v
+!i122 9
+L0 86 48
+R4
+r1
+!s85 0
+31
+R5
+R8
+R6
+!i113 1
+R7
