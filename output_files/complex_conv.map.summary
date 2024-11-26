@@ -1,10 +1,10 @@
-Analysis & Synthesis Status : Successful - Tue Nov 26 14:36:39 2024
+Analysis & Synthesis Status : Successful - Tue Nov 26 16:50:03 2024
 Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 Revision Name : complex_conv
 Top-level Entity Name : conv_complex
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
-Total registers : 1294
+Total registers : 3
 Total pins : 2,465
 Total virtual pins : 0
 Total block memory bits : 0

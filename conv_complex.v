@@ -120,15 +120,12 @@ adder3_complex #(
 // ================================================== //
 
 // States
-parameter   IDLE = 3'b000,
-            CONV = 3'b001,
-            WAIT = 3'b010,
-            SAVE = 3'b011,
-            DONE = 3'b100;
+parameter   IDLE = 2'b00,
+            CONV = 2'b01,
+            DONE = 2'b10;
 
 reg [2:0] curr_state, next_state;
 reg [$clog2(NUM_ELEMS)-1:0] conv_counter;
-reg [$clog2(WAIT_TIME_OP)-1:0] wait_counter; // Count to WAIT_TIME_OP before continuing with convolution
 
 always @(posedge clk or negedge rst)
 begin
@@ -150,7 +147,7 @@ begin
     end
 end
 
-always @(posedge clk)
+always @(*)
 begin
     case(curr_state)
     IDLE:
@@ -161,8 +158,6 @@ begin
         $display("Staaaaaaaaaaarted");
 
             padded_signal = {{4*WORD_LENGTH{1'b0}}, signal, {4*WORD_LENGTH{1'b0}}};
-
-        // $display("padded siiiiiignal: %h", padded_signal);
 
             kernel_sec1_real =  kernel[6*WORD_LENGTH-1:5*WORD_LENGTH];
             kernel_sec1_imag =  kernel[5*WORD_LENGTH-1:4*WORD_LENGTH];
@@ -184,10 +179,10 @@ begin
 
             done = 0;
             conv_counter = 0;
-            wait_counter = 0;
 
             next_state = CONV;
         end
+
         else
         begin
             done = 0;
@@ -227,39 +222,6 @@ begin
 
         $display("//////////////////////////////////////////////////////");
 
-            done = 0;
-            wait_counter = 0;
-            conv_counter = conv_counter;
-            next_state = WAIT;
-        end
-        else
-        begin
-            done = 0;
-            wait_counter = 0;
-            conv_counter = 0;
-            next_state = DONE;
-        end
-    end 
-
-    WAIT:
-    begin
-        if (wait_counter < WAIT_TIME_OP)
-        begin
-            wait_counter =  wait_counter + 1;
-            conv_counter = conv_counter;
-            next_state = WAIT;
-        end
-        else
-        begin
-            wait_counter = 0;
-            conv_counter = conv_counter;
-            next_state = SAVE;
-        end
-    end
-
-    SAVE:
-    begin
-
         $display("mult1_Re: %b", mult1_Re_tmp);
         $display("mult1_Im: %b", mult1_Im_tmp);
 
@@ -274,25 +236,32 @@ begin
         $display("adder_Re: %b", adder_Re);
         $display("adder_Im: %b", adder_Im);
 
-        conv[WORD_LENGTH - 1 : 0] = adder_Re;
-        conv[2*WORD_LENGTH - 1 : WORD_LENGTH] = adder_Im;
+            conv = conv <<< (2*WORD_LENGTH);
+            conv[WORD_LENGTH - 1 : 0] = adder_Re;
+            conv[2*WORD_LENGTH - 1 : WORD_LENGTH] = adder_Im;
 
-        padded_signal = padded_signal >>> (2*WORD_LENGTH);
-        conv = conv <<< (2*WORD_LENGTH);
-        conv_counter = conv_counter + 1;
+            padded_signal = padded_signal >>> (2*WORD_LENGTH);
 
-        next_state = CONV;
-    end
+            conv_counter = conv_counter + 1;
+
+            next_state = CONV;
+        end
+
+        else
+        begin
+            next_state = DONE;
+        end
+    end 
 
     DONE:
     begin
         done = 1;
         next_state = IDLE;
+        $stop;
     end 
 
     default:
     begin
-        next_state = IDLE;
         done = 0;
 
         conv = 0;
@@ -302,6 +271,8 @@ begin
         kernel_sec1_real = 0; kernel_sec1_imag = 0;
         kernel_sec2_real = 0; kernel_sec2_imag = 0;
         kernel_sec3_real = 0; kernel_sec3_imag = 0;
+
+        next_state = IDLE;
     end
     endcase
     
