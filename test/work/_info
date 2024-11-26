@@ -10,23 +10,23 @@ z2
 cModel Technology
 d/home/david/Documents/UNI_S.5/FPGA/complex_conv/test
 vadder3_complex
-Z0 !s110 1732595329
+Z0 !s110 1732614176
 !i10b 1
-!s100 ``M[dY9?b2Ff6E<>=:K<?2
+!s100 `ZYV93bL_57f:mJ_;V]Fl3
 Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
-ID8Qo:TA[8JUZkaBcK2Sl[2
+IB8GH@4f^h;KQ^VQ`^<U:o3
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 Z3 d/home/david/Documents/UNI_S.5/FPGA/FPGA_convolution/test
-w1732594690
+w1732614166
 8../adder3_complex.v
 F../adder3_complex.v
-!i122 40
-L0 1 39
+!i122 71
+L0 1 40
 Z4 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z5 !s108 1732595329.000000
+Z5 !s108 1732614176.000000
 !s107 ./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
 Z6 !s90 -F|comp_files.FILES|
 !i113 1
@@ -42,7 +42,7 @@ R3
 w1732475747
 8../mult_complex.v
 F../mult_complex.v
-!i122 40
+!i122 71
 L0 1 29
 R4
 r1
@@ -56,16 +56,16 @@ R7
 vmult_fixed_complex
 R0
 !i10b 1
-!s100 h4hG@DiP:94ofQFj7[eTR3
+!s100 ze?GL70hB<haLY<IS8zS:2
 R1
-Iizc:i;YAU?TYchZ<ZigUF1
+I_VHRF5Qlc]koaWa>QeB^62
 R2
 R3
-w1732594316
+w1732613362
 8../mult_fixed_complex.v
 F../mult_fixed_complex.v
-!i122 40
-L0 1 53
+!i122 71
+L0 1 44
 R4
 r1
 !s85 0
@@ -78,16 +78,16 @@ R7
 vtb_adder3_complex
 R0
 !i10b 1
-!s100 SAKD54dE7FdWi1=2bE4@62
+!s100 NMP`>^71zZcCfb6CfNmA91
 R1
-ILc=0;W8MQX8Y_aK^Nd3OW0
+I@:lAGW1EXM<8B;D?n[THS0
 R2
 R3
-w1732595328
+w1732610399
 8./adder3_complex_tb.v
 F./adder3_complex_tb.v
-!i122 40
-L0 1 76
+!i122 71
+L0 1 89
 R4
 r1
 !s85 0
@@ -108,7 +108,7 @@ R3
 w1732475511
 8./mult_complex_tb.v
 F./mult_complex_tb.v
-!i122 40
+!i122 71
 L0 3 70
 R4
 r1
@@ -130,7 +130,7 @@ R3
 w1732592877
 8./mult_fixed_complex_tb.v
 F./mult_fixed_complex_tb.v
-!i122 40
+!i122 71
 L0 3 84
 R4
 r1
