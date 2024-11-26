@@ -1,18 +1,34 @@
 # vsim -c tb_adder3_complex -do "run -all; quit" 
-# Start time: 19:17:29 on Nov 24,2024
+# Start time: 22:28:49 on Nov 25,2024
 # Loading work.tb_adder3_complex
 # Loading work.adder3_complex
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (8) for port 'a_Re'. The port definition is at: ../adder3_complex.v(2).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (8) for port 'a_Im'. The port definition is at: ../adder3_complex.v(2).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (8) for port 'b_Re'. The port definition is at: ../adder3_complex.v(2).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (8) for port 'b_Im'. The port definition is at: ../adder3_complex.v(2).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (8) for port 'c_Re'. The port definition is at: ../adder3_complex.v(2).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (8) for port 'c_Im'. The port definition is at: ../adder3_complex.v(2).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (10) for port 'd_Re'. The port definition is at: ../adder3_complex.v(3).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
+# ** Warning: (vsim-3015) [PCDPC] - Port size (9) does not match connection size (10) for port 'd_Im'. The port definition is at: ../adder3_complex.v(3).
+#    Time: 0 ps  Iteration: 0  Instance: /tb_adder3_complex/uut File: ./adder3_complex_tb.v Line: 10
 # run -all
-# Test 1 PASSED: a_Re=9, a_Im=3, b_Re=1, b_Im=6, c_Re=4, c_Im=3 -> d_Re=14, d_Im=12, overflow=0
-# Test 2 PASSED: a_Re=-3, a_Im=-2, b_Re=1, b_Im=1, c_Re=-1, c_Im=-1 -> d_Re=-3, d_Im=-2, overflow=0
-# Test 3 PASSED: a_Re=0, a_Im=0, b_Re=0, b_Im=0, c_Re=0, c_Im=0 -> d_Re=0, d_Im=0, overflow=0
+# Test 1 FAILED: a_Re=x, a_Im=x, b_Re=x, b_Im=x, c_Re=x, c_Im=x -> d_Re=X (expected 14), d_Im=X (expected 12), overflow=x (expected 0)
+# Test 2 FAILED: a_Re=x, a_Im=x, b_Re=x, b_Im=x, c_Re=x, c_Im=x -> d_Re=X (expected 253), d_Im=X (expected 254), overflow=x (expected 0)
+# Test 3 FAILED: a_Re=x, a_Im=x, b_Re=x, b_Im=x, c_Re=x, c_Im=x -> d_Re=X (expected 0), d_Im=X (expected 0), overflow=x (expected 0)
 # =====================================
-# Test Summary: 3/3 tests passed
+# Test Summary: 0/3 tests passed
 # =====================================
-# ** Note: $stop    : ./adder3_complex_tb.v(79)
+# ** Note: $stop    : ./adder3_complex_tb.v(73)
 #    Time: 30 ns  Iteration: 0  Instance: /tb_adder3_complex
-# Break in Module tb_adder3_complex at ./adder3_complex_tb.v line 79
-# Stopped at ./adder3_complex_tb.v line 79
+# Break in Module tb_adder3_complex at ./adder3_complex_tb.v line 73
+# Stopped at ./adder3_complex_tb.v line 73
 #  quit
-# End time: 19:17:29 on Nov 24,2024, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
+# End time: 22:28:50 on Nov 25,2024, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 8

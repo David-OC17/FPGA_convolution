@@ -8,41 +8,41 @@ z2
 !i10e 25
 !i10f 100
 cModel Technology
-Z0 d/home/david/Documents/UNI_S.5/FPGA/complex_conv/test
+d/home/david/Documents/UNI_S.5/FPGA/complex_conv/test
 vadder3_complex
-Z1 !s110 1732497449
+Z0 !s110 1732595329
 !i10b 1
-!s100 Pifz:CA7i:9JD[@R14l<X3
-Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
-IFOFR]P8F0TAUVTNXPD>4N0
-Z3 VDg1SIo80bB@j0V0VzS_@n1
-R0
-w1732497169
+!s100 ``M[dY9?b2Ff6E<>=:K<?2
+Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
+ID8Qo:TA[8JUZkaBcK2Sl[2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+Z3 d/home/david/Documents/UNI_S.5/FPGA/FPGA_convolution/test
+w1732594690
 8../adder3_complex.v
 F../adder3_complex.v
-!i122 9
-L0 1 25
+!i122 40
+L0 1 39
 Z4 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z5 !s108 1732497449.000000
+Z5 !s108 1732595329.000000
 !s107 ./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
 Z6 !s90 -F|comp_files.FILES|
 !i113 1
 Z7 tCvgOpt 0
 vmult_complex
-R1
+R0
 !i10b 1
 !s100 >gRJkLeiIj`Kod4AHcif<2
-R2
+R1
 I683fgnBa]hgbDEO3^b7A41
+R2
 R3
-R0
 w1732475747
 8../mult_complex.v
 F../mult_complex.v
-!i122 9
+!i122 40
 L0 1 29
 R4
 r1
@@ -54,18 +54,18 @@ R6
 !i113 1
 R7
 vmult_fixed_complex
-R1
-!i10b 1
-!s100 Sl0<0aCz]ZeeRQ;be^DKK0
-R2
-I5:Jh`b8m0EOmA_i[:08Ea3
-R3
 R0
-w1732495270
+!i10b 1
+!s100 h4hG@DiP:94ofQFj7[eTR3
+R1
+Iizc:i;YAU?TYchZ<ZigUF1
+R2
+R3
+w1732594316
 8../mult_fixed_complex.v
 F../mult_fixed_complex.v
-!i122 9
-L0 1 51
+!i122 40
+L0 1 53
 R4
 r1
 !s85 0
@@ -76,18 +76,18 @@ R6
 !i113 1
 R7
 vtb_adder3_complex
-R1
-!i10b 1
-!s100 RH[9lb0[f04LKE_gc4T?[1
-R2
-IWXkTzg=5RQUKG?_DOZTWf0
-R3
 R0
-w1732497447
+!i10b 1
+!s100 SAKD54dE7FdWi1=2bE4@62
+R1
+ILc=0;W8MQX8Y_aK^Nd3OW0
+R2
+R3
+w1732595328
 8./adder3_complex_tb.v
 F./adder3_complex_tb.v
-!i122 9
-L0 3 79
+!i122 40
+L0 1 76
 R4
 r1
 !s85 0
@@ -98,17 +98,17 @@ R6
 !i113 1
 R7
 vtb_mult_complex
-R1
+R0
 !i10b 1
 !s100 Te;7QZ3=mf0XlI81QU6@22
-R2
+R1
 I39[2LSNT8GGhml__nS3mX1
+R2
 R3
-R0
 w1732475511
 8./mult_complex_tb.v
 F./mult_complex_tb.v
-!i122 9
+!i122 40
 L0 3 70
 R4
 r1
@@ -120,18 +120,18 @@ R6
 !i113 1
 R7
 vtb_mult_fixed_complex
-R1
-!i10b 1
-!s100 ]1@l<T5K<^=2T@QAm:JiO0
-R2
-IYgKX17Y]Pf[QI1?KV:A8f3
-R3
 R0
-w1732495246
+!i10b 1
+!s100 ccNc2ThgXHo4gb`mFT5fT2
+R1
+IYF4[hEWNmZFKL@?lUeG7S3
+R2
+R3
+w1732592877
 8./mult_fixed_complex_tb.v
 F./mult_fixed_complex_tb.v
-!i122 9
-L0 86 48
+!i122 40
+L0 3 84
 R4
 r1
 !s85 0
