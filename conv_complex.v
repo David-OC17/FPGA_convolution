@@ -1,38 +1,41 @@
-module conv_complex #(parameter QI = 3, QF = 3, NUM_ELEMS = 100, WORD_LENGTH = (QI+QF))(
-   input wire clk, rst, en,
-   input wire [2*3*WORD_LENGTH] kernel,
-   input wire [2*WORD_LENGTH*NUM_ELEMS] signal,
+module conv_complex #(parameter QI = 3, QF = 3, NUM_ELEMS = 100)(
+    input wire clk, rst, en,
+    input wire [2*3*(QI+QF)-1:0] kernel,
+    input wire [2*(QI+QF)*NUM_ELEMS-1:0] signal,
 
-   output reg[2*WORD_LENGTH*(NUM_ELEMS+2)] conv,
-   output reg overflow,
-   output reg done
+    output reg [2*(QI+QF)*(NUM_ELEMS+2)-1:0] conv,
+    output reg overflow,
+    output reg done
 );
 
+localparam WORD_LENGTH = QI + QF;
 localparam KERNEL_SIZE = 3; // kernel size
+localparam WAIT_TIME_OP = 10; // Time to wait before performing next convolution step
 
 // ================================================== //
 //                     Aux vars                       // 
 // ================================================== //
 
-reg [2*WORD_LENGTH*(NUM_ELEMS+KERNEL_SIZE-1)] padded_signal;
-reg [2*WORD_LENGTH] kernel_sec1_real, kernel_sec1_imag,
-                    kernel_sec2_real, kernel_sec2_imag,
-                    kernel_sec3_real, kernel_sec3_imag;
+reg [2*WORD_LENGTH*(NUM_ELEMS+2*(KERNEL_SIZE-1))-1:0] padded_signal;
+
+reg [WORD_LENGTH-1:0]   kernel_sec1_real, kernel_sec1_imag,
+                        kernel_sec2_real, kernel_sec2_imag,
+                        kernel_sec3_real, kernel_sec3_imag;
 
 // ================================================== //
 //               Complex fixed mult                   // 
 // ================================================== //
 
-reg overflow_mult1, overflow_mult2, overflow_mult3;
-reg bad_rep_mult1, bad_rep_mult2, bad_rep_mult3;
+wire overflow_mult1, overflow_mult2, overflow_mult3;
+wire bad_rep_mult1, bad_rep_mult2, bad_rep_mult3;
 
 // Inputs to complex multiplications
 reg signed [WORD_LENGTH-1:0] sig1_Re, sig1_Im, sig2_Re, sig2_Im, sig3_Re, sig3_Im;
 
 // Results of complex multiplications
-reg signed [WORD_LENGTH-1:0]  mult1_Re_tmp, mult1_Im_tmp,
-                        mult2_Re_tmp, mult2_Im_tmp,
-                        mult3_Re_tmp, mult3_Im_tmp;
+wire signed [WORD_LENGTH-1:0] mult1_Re_tmp, mult1_Im_tmp,
+                              mult2_Re_tmp, mult2_Im_tmp,
+                              mult3_Re_tmp, mult3_Im_tmp;
 
 mult_fixed_complex #(
     .QI(QI),
@@ -89,8 +92,8 @@ mult_fixed_complex #(
 //                   3 Complex adder                  // 
 // ================================================== //
 
-reg signed [WORD_LENGTH-1:0] adder_Re, adder_Im;
-reg overflow_adder;
+wire signed [WORD_LENGTH-1:0] adder_Re, adder_Im;
+wire overflow_adder;
 
 adder3_complex #(
     .QI(QI),
@@ -116,27 +119,22 @@ adder3_complex #(
 //                   State machine                    // 
 // ================================================== //
 
+// States
+parameter   IDLE = 3'b000,
+            CONV = 3'b001,
+            WAIT = 3'b010,
+            SAVE = 3'b011,
+            DONE = 3'b100;
+
+reg [2:0] curr_state, next_state;
+reg [$clog2(NUM_ELEMS)-1:0] conv_counter;
+reg [$clog2(WAIT_TIME_OP)-1:0] wait_counter; // Count to WAIT_TIME_OP before continuing with convolution
+
 always @(posedge clk or negedge rst)
 begin
     if (!rst)
     begin
-        done <= 0;
-
-        conv <= 0;
-        overflow <= 0;
-        conv_counter <= 0;
-
-        mult1_Re_tmp <= 0; mult1_Im_tmp <= 0;
-        mult2_Re_tmp <= 0; mult2_Im_tmp <= 0;
-        mult3_Re_tmp <= 0; mult3_Im_tmp <= 0;
-
-        adder_Re_tmp <= 0; adder_Im_tmp <= 0;
-
-        kernel_sec1_real <= 0; kernel_sec1_imag <= 0;
-        kernel_sec2_real <= 0; kernel_sec2_imag <= 0;
-        kernel_sec3_real <= 0; kernel_sec3_imag <= 0;
-
-        next_state = IDLE;
+        curr_state <= IDLE;
     end
     else
     begin
@@ -148,20 +146,9 @@ always @(posedge clk)
 begin
     if (overflow_adder || overflow_mult1 || overflow_mult2 || overflow_mult3)
     begin
-        conv <= 0;
         overflow <= 1;
-        done <= 1;
     end
 end
-
-
-// States
-parameter [1:0] IDLE = 0,
-                CONV = 1,
-                DONE = 2;
-
-reg [2:0] curr_state, next_state;
-reg [$clog2(NUM_ELEMS)] conv_counter;
 
 always @(posedge clk)
 begin
@@ -170,23 +157,47 @@ begin
     begin
         if (en)
         begin
-            padded_signal = {4*WORD_LENGTH{1'b0}, signal, 4*WORD_LENGTH{1'b0}};
 
-            kernel_sec1_real =  kernel[2*WORD_LENGTH-1:WORD_LENGTH];
-            kernel_sec1_imag =  kernel[WORD_LENGTH-1:0];
+        $display("Staaaaaaaaaaarted");
+
+            padded_signal = {{4*WORD_LENGTH{1'b0}}, signal, {4*WORD_LENGTH{1'b0}}};
+
+        // $display("padded siiiiiignal: %h", padded_signal);
+
+            kernel_sec1_real =  kernel[6*WORD_LENGTH-1:5*WORD_LENGTH];
+            kernel_sec1_imag =  kernel[5*WORD_LENGTH-1:4*WORD_LENGTH];
+
+        $display("kernel_real1: %b", kernel_sec1_real);
+        $display("kernel_imag1: %b", kernel_sec1_imag);
 
             kernel_sec2_real =  kernel[4*WORD_LENGTH-1:3*WORD_LENGTH];
             kernel_sec2_imag =  kernel[3*WORD_LENGTH-1:2*WORD_LENGTH];
 
-            kernel_sec3_real =  kernel[6*WORD_LENGTH-1:5*WORD_LENGTH];
-            kernel_sec3_imag =  kernel[5*WORD_LENGTH-1:4*WORD_LENGTH];
+        $display("kernel_real2: %b", kernel_sec2_real);
+        $display("kernel_imag2: %b", kernel_sec2_imag);
+
+            kernel_sec3_real =  kernel[2*WORD_LENGTH-1:WORD_LENGTH];
+            kernel_sec3_imag =  kernel[WORD_LENGTH-1:0];
+
+        $display("kernel_real3: %b", kernel_sec3_real);
+        $display("kernel_imag3: %b", kernel_sec3_imag);
+
+            done = 0;
+            conv_counter = 0;
+            wait_counter = 0;
 
             next_state = CONV;
         end
         else
         begin
             done = 0;
-            overflow = 0;
+            conv = 0;
+            conv_counter = 0;
+            padded_signal = 0;
+
+            kernel_sec1_real = 0; kernel_sec1_imag = 0;
+            kernel_sec2_real = 0; kernel_sec2_imag = 0;
+            kernel_sec3_real = 0; kernel_sec3_imag = 0;
 
             next_state = IDLE;
         end
@@ -196,27 +207,82 @@ begin
     begin
         if (conv_counter < NUM_ELEMS + 2)
         begin
-            sig1_Im = signal[(2*conv_counter + 1)*WORD_LENGTH - 1 : 2*conv_counter*WORD_LENGTH];
-            sig1_Re = signal[(2*conv_counter + 2)*WORD_LENGTH - 1 : (2*conv_counter + 1)*WORD_LENGTH];
+            sig1_Im = padded_signal[WORD_LENGTH - 1 : 0];
+            sig1_Re = padded_signal[2*WORD_LENGTH - 1 : WORD_LENGTH];
 
-            sig2_Im = signal[(2*conv_counter + 3)*WORD_LENGTH - 1 : (2*conv_counter + 2)*WORD_LENGTH];
-            sig2_Re = signal[(2*conv_counter + 4)*WORD_LENGTH - 1 : (2*conv_counter + 3)*WORD_LENGTH];
+        $display("signal1_Im: %b", sig1_Im);
+        $display("signal1_Re: %b", sig1_Re);
 
-            sig3_Im = signal[(2*conv_counter + 5)*WORD_LENGTH - 1 : (2*conv_counter + 4)*WORD_LENGTH];
-            sig3_Re= signal[(2*conv_counter + 6)*WORD_LENGTH - 1 : (2*conv_counter + 5)*WORD_LENGTH];
+            sig2_Im = padded_signal[3*WORD_LENGTH - 1 : 2*WORD_LENGTH];
+            sig2_Re = padded_signal[4*WORD_LENGTH - 1 : 3*WORD_LENGTH];
 
-            // Complex mult and add done with new a, b, c values
-            conv[(2*conv_counter + 1)*WORD_LENGTH - 1 : 2*conv_counter*WORD_LENGTH] = adder_Re;
-            conv[(2*conv_counter + 2)*WORD_LENGTH - 1 : (2*conv_counter + 1)*WORD_LENGTH] = adder_Im;
+        $display("signal2_Im: %b", sig2_Im);
+        $display("signal2_Re: %b", sig2_Re);
 
-            next_state = CONV;
+            sig3_Im = padded_signal[5*WORD_LENGTH - 1 : 4*WORD_LENGTH];
+            sig3_Re = padded_signal[6*WORD_LENGTH - 1 : 5*WORD_LENGTH];
+
+        $display("signal3_Im: %b", sig3_Im);
+        $display("signal3_Re: %b", sig3_Re);
+
+        $display("//////////////////////////////////////////////////////");
+
+            done = 0;
+            wait_counter = 0;
+            conv_counter = conv_counter;
+            next_state = WAIT;
         end
         else
         begin
+            done = 0;
+            wait_counter = 0;
             conv_counter = 0;
             next_state = DONE;
         end
     end 
+
+    WAIT:
+    begin
+        if (wait_counter < WAIT_TIME_OP)
+        begin
+            wait_counter =  wait_counter + 1;
+            conv_counter = conv_counter;
+            next_state = WAIT;
+        end
+        else
+        begin
+            wait_counter = 0;
+            conv_counter = conv_counter;
+            next_state = SAVE;
+        end
+    end
+
+    SAVE:
+    begin
+
+        $display("mult1_Re: %b", mult1_Re_tmp);
+        $display("mult1_Im: %b", mult1_Im_tmp);
+
+        $display("mult2_Re: %b", mult2_Re_tmp);
+        $display("mult2_Im: %b", mult2_Im_tmp);
+
+        $display("mult3_Re: %b", mult3_Re_tmp);
+        $display("mult3_Im: %b", mult3_Im_tmp);
+
+        $display("//////////////////////////////////////////////////////");
+
+        $display("adder_Re: %b", adder_Re);
+        $display("adder_Im: %b", adder_Im);
+
+        conv[WORD_LENGTH - 1 : 0] = adder_Re;
+        conv[2*WORD_LENGTH - 1 : WORD_LENGTH] = adder_Im;
+
+        padded_signal = padded_signal >>> (2*WORD_LENGTH);
+        conv = conv <<< (2*WORD_LENGTH);
+        conv_counter = conv_counter + 1;
+
+        next_state = CONV;
+    end
 
     DONE:
     begin
@@ -232,12 +298,6 @@ begin
         conv = 0;
         overflow = 0;
         conv_counter = 0;
-
-        mult1_Re_tmp = 0; mult1_Im_tmp = 0;
-        mult2_Re_tmp = 0; mult2_Im_tmp = 0;
-        mult3_Re_tmp = 0; mult3_Im_tmp = 0;
-
-        adder_Re_tmp = 0; adder_Im_tmp = 0;
 
         kernel_sec1_real = 0; kernel_sec1_imag = 0;
         kernel_sec2_real = 0; kernel_sec2_imag = 0;

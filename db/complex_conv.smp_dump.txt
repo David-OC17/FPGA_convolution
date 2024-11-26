@@ -1,0 +1,16 @@
+
+State Machine - |conv_complex|next_state
+Name next_state.SAVE next_state.WAIT next_state.CONV next_state.IDLE next_state.DONE 
+next_state.IDLE 0 0 0 0 0 
+next_state.CONV 0 0 1 1 0 
+next_state.WAIT 0 1 0 1 0 
+next_state.SAVE 1 0 0 1 0 
+next_state.DONE 0 0 0 1 1 
+
+State Machine - |conv_complex|curr_state
+Name curr_state.SAVE curr_state.WAIT curr_state.CONV curr_state.IDLE curr_state.DONE 
+curr_state.IDLE 0 0 0 0 0 
+curr_state.CONV 0 0 1 1 0 
+curr_state.WAIT 0 1 0 1 0 
+curr_state.SAVE 1 0 0 1 0 
+curr_state.DONE 0 0 0 1 1 

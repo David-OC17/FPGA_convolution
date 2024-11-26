@@ -10,4 +10,7 @@ vlog -F comp_files.FILES
 # vsim -c tb_mult_fixed_complex -do "run -all; quit"
 
 # Adder3 complex
-vsim -c tb_adder3_complex -do "run -all; quit"
+# vsim -c tb_adder3_complex -do "run -all; quit"
+
+# Conv complex
+vsim -c tb_conv_complex -do "run -all; quit"

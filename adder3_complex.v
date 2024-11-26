@@ -1,8 +1,8 @@
 module adder3_complex #(parameter QI = 3, QF = 3)(
-    input signed [QI+QF-1:0] a_Re, a_Im, b_Re, b_Im, c_Re, c_Im,
-    output signed [QI+QF-1:0] d_Re, d_Im,
+    input wire signed [QI+QF-1:0] a_Re, a_Im, b_Re, b_Im, c_Re, c_Im,
+    output reg signed [QI+QF-1:0] d_Re, d_Im,
 
-    output wire overflow
+    output reg overflow
 );
 
 parameter WIDTH = QI + QF; // Total bit width
@@ -30,11 +30,12 @@ always @(*) begin
                         (real_full_range[WIDTH-1] != partial_sum_real[WIDTH-1]));
     overflow_abc_imag = ((partial_sum_imag[WIDTH-1] == c_Im[WIDTH-1]) &&
                         (imag_full_range[WIDTH-1] != partial_sum_imag[WIDTH-1]));
+
+    // Final assignments
+    overflow = overflow_ab_real || overflow_abc_real || overflow_ab_imag || overflow_abc_imag;
+
+    d_Re = real_full_range;
+    d_Im = imag_full_range;
 end
-
-assign overflow = overflow_ab_real || overflow_abc_real || overflow_ab_imag || overflow_abc_imag;
-
-assign d_Re = real_full_range;
-assign d_Im = imag_full_range;
 
 endmodule

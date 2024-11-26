@@ -6,3 +6,6 @@
 
 ../adder3_complex.v
 ./adder3_complex_tb.v
+
+../conv_complex.v
+./conv_complex_tb.v

@@ -10,27 +10,49 @@ z2
 cModel Technology
 d/home/david/Documents/UNI_S.5/FPGA/complex_conv/test
 vadder3_complex
-Z0 !s110 1732614176
+Z0 !s110 1732656119
 !i10b 1
-!s100 `ZYV93bL_57f:mJ_;V]Fl3
+!s100 :7V>S6N_N;W:U0blG_8@31
 Z1 !s11b Dg1SIo80bB@j0V0VzS_@n1
-IB8GH@4f^h;KQ^VQ`^<U:o3
+I^U8190@RRm3?:SW3_Ln<e0
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 Z3 d/home/david/Documents/UNI_S.5/FPGA/FPGA_convolution/test
-w1732614166
+w1732645807
 8../adder3_complex.v
 F../adder3_complex.v
-!i122 71
-L0 1 40
+!i122 77
+L0 1 41
 Z4 OV;L;2020.1;71
 r1
 !s85 0
 31
-Z5 !s108 1732614176.000000
-!s107 ./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
+Z5 !s108 1732656119.000000
+!s107 ./conv_complex_tb.v|../conv_complex.v|./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
 Z6 !s90 -F|comp_files.FILES|
 !i113 1
 Z7 tCvgOpt 0
+vconv_complex
+R0
+!i10b 1
+!s100 ^8QAhiZA<2[D=YFl1XYZ`3
+R1
+IDz@diNKBIPoh=_<`N9Y]l1
+R2
+R3
+w1732656117
+8../conv_complex.v
+F../conv_complex.v
+!i122 77
+L0 1 310
+R4
+r1
+!s85 0
+31
+R5
+Z8 !s107 ./conv_complex_tb.v|../conv_complex.v|./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
+R6
+!i113 1
+R7
 vmult_complex
 R0
 !i10b 1
@@ -42,30 +64,30 @@ R3
 w1732475747
 8../mult_complex.v
 F../mult_complex.v
-!i122 71
+!i122 77
 L0 1 29
 R4
 r1
 !s85 0
 31
 R5
-Z8 !s107 ./adder3_complex_tb.v|../adder3_complex.v|./mult_fixed_complex_tb.v|../mult_fixed_complex.v|./mult_complex_tb.v|../mult_complex.v|
+R8
 R6
 !i113 1
 R7
 vmult_fixed_complex
 R0
 !i10b 1
-!s100 ze?GL70hB<haLY<IS8zS:2
+!s100 1[9Q[:hV`_UiJ4F0jLX1n0
 R1
-I_VHRF5Qlc]koaWa>QeB^62
+I3UfHfN7]26GCd?@bGKDj42
 R2
 R3
-w1732613362
+w1732645630
 8../mult_fixed_complex.v
 F../mult_fixed_complex.v
-!i122 71
-L0 1 44
+!i122 77
+L0 1 47
 R4
 r1
 !s85 0
@@ -78,16 +100,38 @@ R7
 vtb_adder3_complex
 R0
 !i10b 1
-!s100 NMP`>^71zZcCfb6CfNmA91
+!s100 ?nmfa8WlKDkj853NHS5FE0
 R1
-I@:lAGW1EXM<8B;D?n[THS0
+IJYbbgTRf]JG]2ZG`WCjWf0
 R2
 R3
-w1732610399
+w1732614982
 8./adder3_complex_tb.v
 F./adder3_complex_tb.v
-!i122 71
-L0 1 89
+!i122 77
+L0 1 93
+R4
+r1
+!s85 0
+31
+R5
+R8
+R6
+!i113 1
+R7
+vtb_conv_complex
+R0
+!i10b 1
+!s100 [fj3PD2Tf9JPhaCX[d4If1
+R1
+I=2K9UzS=oR6RYE<WJC4:;0
+R2
+R3
+w1732654932
+8./conv_complex_tb.v
+F./conv_complex_tb.v
+!i122 77
+L0 3 89
 R4
 r1
 !s85 0
@@ -108,7 +152,7 @@ R3
 w1732475511
 8./mult_complex_tb.v
 F./mult_complex_tb.v
-!i122 71
+!i122 77
 L0 3 70
 R4
 r1
@@ -130,7 +174,7 @@ R3
 w1732592877
 8./mult_fixed_complex_tb.v
 F./mult_fixed_complex_tb.v
-!i122 71
+!i122 77
 L0 3 84
 R4
 r1
