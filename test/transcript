@@ -1,164 +1,21 @@
 # vsim -c tb_conv_complex -do "run -all; quit" 
-# Start time: 16:49:29 on Nov 26,2024
+# Start time: 21:32:20 on Nov 26,2024
 # Loading work.tb_conv_complex
 # Loading work.conv_complex
 # Loading work.mult_fixed_complex
 # Loading work.adder3_complex
+# ** Warning: (vsim-2685) [TFMPC] - Too few port connections for 'uut'.  Expected 9, found 8.
+#    Time: 0 ps  Iteration: 0  Instance: /tb_conv_complex/uut File: ./conv_complex_tb.v Line: 27
+# ** Warning: (vsim-3722) ./conv_complex_tb.v(27): [TFMPC] - Missing connection for port 'counter'.
 # run -all
-# Staaaaaaaaaaarted
-# kernel_real1: 00000100
-# kernel_imag1: 00100000
-# kernel_real2: 00010010
-# kernel_imag2: 11110000
-# kernel_real3: 00000000
-# kernel_imag3: 11110100
-# signal1_Im: 00000000
-# signal1_Re: 00000000
-# signal2_Im: 00000000
-# signal2_Re: 00000000
-# signal3_Im: 11111100
-# signal3_Re: 00101000
 # //////////////////////////////////////////////////////
-# mult1_Re: xxxxxxxx
-# mult1_Im: xxxxxxxx
-# mult2_Re: xxxxxxxx
-# mult2_Im: xxxxxxxx
-# mult3_Re: xxxxxxxx
-# mult3_Im: xxxxxxxx
-# //////////////////////////////////////////////////////
-# adder_Re: xxxxxxxx
-# adder_Im: xxxxxxxx
-# signal1_Im: 00000000
-# signal1_Re: 00000000
-# signal2_Im: 11111100
-# signal2_Re: 00101000
-# signal3_Im: 00010100
-# signal3_Re: 11111010
-# //////////////////////////////////////////////////////
-# mult1_Re: 00000000
-# mult1_Im: 00000000
-# mult2_Re: 00000000
-# mult2_Im: 00000000
-# mult3_Re: 11111101
-# mult3_Im: 11100010
-# //////////////////////////////////////////////////////
-# adder_Re: xxxxxxxx
-# adder_Im: xxxxxxxx
-# signal1_Im: 11111100
-# signal1_Re: 00101000
-# signal2_Im: 00010100
-# signal2_Re: 11111010
-# signal3_Im: 11010000
-# signal3_Re: 00010001
-# //////////////////////////////////////////////////////
-# mult1_Re: 00000000
-# mult1_Im: 00000000
-# mult2_Re: 00000000
-# mult2_Im: 00000000
-# mult3_Re: 11111101
-# mult3_Im: 11100010
-# //////////////////////////////////////////////////////
-# adder_Re: 11111101
-# adder_Im: 11100010
-# signal1_Im: 00010100
-# signal1_Re: 11111010
-# signal2_Im: 11010000
-# signal2_Re: 00010001
-# signal3_Im: 00000000
-# signal3_Re: 00000000
-# //////////////////////////////////////////////////////
-# mult1_Re: 00000000
-# mult1_Im: 00000000
-# mult2_Re: 00101001
-# mult2_Im: 11010011
-# mult3_Re: 00001111
-# mult3_Im: 00000100
-# //////////////////////////////////////////////////////
-# adder_Re: 11111101
-# adder_Im: 11100010
-# signal1_Im: 11010000
-# signal1_Re: 00010001
-# signal2_Im: 00000000
-# signal2_Re: 00000000
-# signal3_Im: 00000000
-# signal3_Re: 00000000
-# //////////////////////////////////////////////////////
-# mult1_Re: 00010010
-# mult1_Im: 01001111
-# mult2_Re: 00001101
-# mult2_Im: 00011100
-# mult3_Re: 11011100
-# mult3_Im: 11110011
-# //////////////////////////////////////////////////////
-# adder_Re: 00111000
-# adder_Im: 11010111
-# signal1_Im: 00000000
-# signal1_Re: 00000000
-# signal2_Im: 00000000
-# signal2_Re: 00000000
-# signal3_Im: 00000000
-# signal3_Re: 00000000
-# //////////////////////////////////////////////////////
-# mult1_Re: 11010110
-# mult1_Im: 11111001
-# mult2_Re: 11100011
-# mult2_Im: 10111001
-# mult3_Re: 00000000
-# mult3_Im: 00000000
-# //////////////////////////////////////////////////////
-# adder_Re: 11111011
-# adder_Im: 01011110
-# signal1_Im: 00000000
-# signal1_Re: 00000000
-# signal2_Im: 00000000
-# signal2_Re: 00000000
-# signal3_Im: 00000000
-# signal3_Re: 00000000
-# //////////////////////////////////////////////////////
-# mult1_Re: 01100100
-# mult1_Im: 00010110
-# mult2_Re: 00000000
-# mult2_Im: 00000000
-# mult3_Re: 00000000
-# mult3_Im: 00000000
-# //////////////////////////////////////////////////////
-# adder_Re: 10111001
-# adder_Im: 10110010
-# signal1_Im: 00000000
-# signal1_Re: 00000000
-# signal2_Im: 00000000
-# signal2_Re: 00000000
-# signal3_Im: 00000000
-# signal3_Re: 00000000
-# //////////////////////////////////////////////////////
-# mult1_Re: 00000000
-# mult1_Im: 00000000
-# mult2_Re: 00000000
-# mult2_Im: 00000000
-# mult3_Re: 00000000
-# mult3_Im: 00000000
-# //////////////////////////////////////////////////////
-# adder_Re: 01100100
-# adder_Im: 00010110
-# signal1_Im: 00000000
-# signal1_Re: 00000000
-# signal2_Im: 00000000
-# signal2_Re: 00000000
-# signal3_Im: 00000000
-# signal3_Re: 00000000
-# //////////////////////////////////////////////////////
-# mult1_Re: 00000000
-# mult1_Im: 00000000
-# mult2_Re: 00000000
-# mult2_Im: 00000000
-# mult3_Re: 00000000
-# mult3_Im: 00000000
-# //////////////////////////////////////////////////////
-# adder_Re: 00000000
-# adder_Im: 00000000
-# Break key hit
-# Simulation stop requested.
+# Convolution Output: d7385efbb2b916641664
+# Convolution Output: 11010111001110000101111011111011101100101011100100010110011001000001011001100100
+# Overflow: 0
+# ** Note: $stop    : ./conv_complex_tb.v(97)
+#    Time: 85 ns  Iteration: 0  Instance: /tb_conv_complex
+# Break in Module tb_conv_complex at ./conv_complex_tb.v line 97
+# Stopped at ./conv_complex_tb.v line 97
 #  quit
-# End time: 16:49:33 on Nov 26,2024, Elapsed time: 0:00:04
-# Errors: 0, Warnings: 0
-# Break key hit
+# End time: 21:32:20 on Nov 26,2024, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 2

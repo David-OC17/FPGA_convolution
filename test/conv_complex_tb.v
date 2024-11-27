@@ -2,7 +2,6 @@
 
 module tb_conv_complex;
 
-    // Parameters
     parameter QI = 4;
     parameter QF = 4;
     parameter NUM_ELEMS = 3;
@@ -56,34 +55,44 @@ module tb_conv_complex;
         // Test Case 1: Simple convolution with known values
         #10;
         en = 1;
+        clk = 1;
+        clk = 0;
+
         kernel = { 8'b0000_0100, 8'b0010_0000, 8'b0001_0010, 8'b1111_0000, 8'b0000_0000, 8'b1111_0100 }; // not reversed
         signal = { 8'b0001_0001, 8'b1101_0000, 8'b1111_1010, 8'b0001_0100, 8'b0010_1000, 8'b1111_1100 }; // reversed
 
-        // Wait for convolution to complete
+
+        kernel = { 
+            8'b0000_0100, // 0.25
+            8'b0010_0000, // 2.0
+            8'b0001_0010, // 1.125
+            8'b1111_0000, // -1.0
+            8'b0000_0000, // 0.0
+            8'b1111_0100  // -0.75
+        }; // not reversed
+
+        signal = { 
+            8'b0001_0001, // 1.0625
+            8'b1101_0000, // -2.0
+            8'b1111_1010, // -0.375
+            8'b0001_0100, // 1.25 
+            8'b0010_1000, // 2.5
+            8'b1111_1100  // -0.25
+        }; // reversed
+
+        #10;
+        clk = 1;
+        clk = 0;
+
         wait(done);
         #10;
 
+        clk = 1;
+        clk = 0;
+
         $display("//////////////////////////////////////////////////////");
-        // Check results (add specific checks here as needed)
-        $display("Convolution Output: %h", conv);
+        $display("Convolution Output: %b", conv);
         $display("Overflow: %b", overflow);
-
-        // // Test Case 2: Overflow scenario
-        // #10;
-        // en = 1;
-        // kernel = { 6'd32, 6'd32, 6'd32, 6'd32, 6'd32, 6'd32 }; // Large kernel values
-        // signal = { 
-        //     6'd32, 6'd32, 6'd32, 6'd32, 6'd32, 6'd32, 
-        //     6'd32, 6'd32, 6'd32, 6'd32, 6'd32, 6'd32 
-        // }; // Large signal values
-
-        // // Wait for convolution to complete
-        // wait(done);
-        // #10;
-
-        // // Check results
-        // $display("Convolution Output: %h", conv);
-        // $display("Overflow: %b", overflow);
 
         $stop;
     end
